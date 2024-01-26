@@ -1,51 +1,61 @@
-const Developer = require('../models/developer.model');
- 
-module.exports.findAllDevelopers = (req, res) => {
-    Developer.find()
-        .then((allDaDevelopers) => {
-            res.json({ developers: allDaDevelopers })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
+
+
+
+const DeveloperSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        required: [true, "First name is required"],
+        minlength:[3, "First name must be 3 characters!"],
+        maxlength: [20, "First name's length can be no more than 20 characters!"]
+    },
+    lastName: {
+        type: String,
+        required: [true, "Last name is required"],
+        minlength:[3, "Last name must be 3 characters!"],
+        maxlength: [20, "Last name's length can be no more than 20 characters!"]
+    },
+    email: {
+        type: String,
+        required: [true, "Email is required"],
+        validate: {
+            validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
+            message: "Please enter a valid email"
+        }
+    },
+    password: {
+        type: String,
+        required: [true, "Password is required"],
+        minlength: [8, "Password must be 8 characters or longer"]
+    }
+    });
+
+    
+DeveloperSchema.virtual('confirmPassword')
+.get( () => this._confirmPassword )
+.set( value => this._confirmPassword = value );
+// This will check if the `password` and `confirmPassword` fields are the same
+DeveloperSchema.pre('validate', function(next) {
+    if (this.password !== this.confirmPassword) {
+    this.invalidate('confirmPassword', 'Password must match confirm password');
+    }
+    next();
+});
+
+DeveloperSchema.pre('save', function(next) {
+    bcrypt.hash(this.password, 10)
+        .then(hash => {
+        this.password = hash;
+        next();
         });
-}
+    });
+
+
+
+
+
+const Developer = mongoose.model('Developer', DeveloperSchema);
  
-module.exports.findOneSingleDeveloper = (req, res) => {
-    Developer.findOne({ _id: req.params.id })
-        .then(oneSingleDeveloper => {
-            res.json({ developer: oneSingleDeveloper })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });}
- 
-module.exports.createNewDeveloper = (req, res) => {
-    Developer.create(req.body)
-        .then(newlyCreatedDeveloper => {
-            res.json({ developer: newlyCreatedDeveloper })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });}
- 
-module.exports.updateExistingDeveloper = (req, res) => {
-    Developer.findOneAndUpdate(
-        { _id: req.params.id },
-        req.body,
-        { new: true, runValidators: true }
-    )
-        .then(updatedDeveloper => {
-            res.json({ developer: updatedDeveloper })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });}
- 
-module.exports.deleteAnExistingDeveloper = (req, res) => {
-    Developer.deleteOne({ _id: req.params.id })
-        .then(result => {
-            res.json({ result: result })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });}
+module.exports = Developer;
