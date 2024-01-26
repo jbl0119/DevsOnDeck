@@ -6,4 +6,5 @@ module.exports = app => {
     app.patch('/api/developers/:id', DeveloperController.updateExistingDeveloper);
     app.post('/api/developers', DeveloperController.createNewDeveloper);
     app.delete('/api/developers/:id', DeveloperController.deleteAnExistingDeveloper);
+    app.get('/api/languages', DeveloperController.findAllLanguages);
 }

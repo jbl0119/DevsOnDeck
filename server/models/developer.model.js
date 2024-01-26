@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 
-
-
 const DeveloperSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -25,11 +23,34 @@ const DeveloperSchema = new mongoose.Schema({
             message: "Please enter a valid email"
         }
     },
+    address: {
+        type: String,
+        required: [true, "Address is required"],
+        maxlength: [50, "Addresss length can be no more than 50 characters!"]
+    },
+    city: {
+        type: String,
+        required: [true, "City is required"],
+        maxlength: [50, "Citys length can be no more than 50 characters!"]
+    },
+    state: {
+        type: String,
+        required: [true, "State is required"],
+        minlength:[2]
+    },
     password: {
         type: String,
         required: [true, "Password is required"],
         minlength: [8, "Password must be 8 characters or longer"]
-    }
+    },
+    Language: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Language' 
+    }],
+    Framework: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Framework' 
+    }],
     });
 
     
