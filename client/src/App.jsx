@@ -6,7 +6,6 @@ import DevRegister from './components/DevRegister';
 
 function App() {
   
-
   return (
     <BrowserRouter>
     <div> 
