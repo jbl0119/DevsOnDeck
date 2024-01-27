@@ -1,15 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import './App.css'
+import DevRegister from './components/DevRegister';
 
 function App() {
-  const [count, setCount] = useState(0)
-  const change = 1;
+
   return (
-    <>
-      "hello world!"
-    </>
+    <BrowserRouter>
+    <div> 
+      <Routes>
+        
+        <Route path="/DevRegister" element={<DevRegister/>}/>
+        
+      </Routes>
+    </div>
+    </BrowserRouter>
   )
 }
 
