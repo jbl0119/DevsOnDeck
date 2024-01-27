@@ -33,21 +33,34 @@ module.exports.findOneSingleDeveloper = (req, res) => {
 
 module.exports.createNewDeveloper = async (req, res) => {
     try {
-        // Extract language string from request body
-        const { Language, ...developerData } = req.body;
+        // Extract languages array from request body
+        const { languages, frameworks, ...developerData } = req.body;
 
-        // Validate that Language is a string
-        if (typeof Language !== 'string' || !Language) {
-            return res.status(400).json({ message: 'Language must be a non-empty string' });
+        // Validate that languages is an array
+        if (!Array.isArray(languages) || languages.length === 0) {
+            return res.status(400).json({ message: 'Languages must be a non-empty array' });
+        }
+        
+        if (!Array.isArray(frameworks) || frameworks.length === 0) {
+            return res.status(400).json({ message: 'Frameworks must be a non-empty array' });
         }
 
+
         // Create new developer with other fields
-        const newDeveloper = await Developer.create({
+        const newDeveloper = new Developer({
             ...developerData,
-            language: Language, // Use the Language string directly
+            languages: languages,
+            frameworks: frameworks,
         });
 
-        res.json({ developer: { ...newDeveloper._doc, language: { name: Language } } });
+        // Save the document to ensure virtuals are populated
+        await newDeveloper.save();
+
+        // Respond with the array of languages
+        res.json({ developer: { ...newDeveloper.toJSON(), languages: languages,frameworks: frameworks } });
+        console.log(languages);
+        console.log(frameworks);
+        console.log(newDeveloper);
     } catch (err) {
         res.status(500).json({ message: 'Something went wrong', error: err });
     }

@@ -43,13 +43,11 @@ const DeveloperSchema = new mongoose.Schema({
         required: [true, "Password is required"],
         minlength: [8, "Password must be 8 characters or longer"]
     },
-    Language: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Language' 
+    languages: [{
+        type: String,
     }],
-    Framework: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Framework' 
+    frameworks: [{
+        type: String,
     }],
     });
 
@@ -73,7 +71,17 @@ DeveloperSchema.pre('save', function(next) {
         });
     });
 
+DeveloperSchema.virtual('language', {
+    ref: 'DevLanguage',
+    localField: '_id',
+    foreignField: 'developerId',
+});
 
+DeveloperSchema.virtual('framework', {
+    ref: 'DevLanguage',
+    localField: '_id',
+    foreignField: 'developerId',
+});
 
 
 
