@@ -9,11 +9,27 @@ async function preloadLanguages() {
 
     // Define default languages
     const defaultLanguages = [
-      { name: 'JavaScript' },
-      { name: 'Python' },
-      { name: 'Java' },
-      { name: 'SQL' },
-      { name: 'CSS'},
+      { name: 'html5' }, 
+      { name: 'css3' },
+      { name: 'python' },
+      { name: 'javascript' },
+      { name: 'java' },
+      { name: 'cplusplus' },
+      { name: 'ruby' },
+      { name: 'csharp' },
+      { name: 'swift' },
+      { name: 'go' },
+      { name: 'php' },
+      { name: 'typescript' },
+      { name: 'rust' },
+      { name: 'kotlin' },
+      { name: 'scala' },
+      { name: 'perl' },
+      { name: 'haskell' },
+      { name: 'lua' },
+      { name: 'r' },
+      { name: 'dart' },
+      { name: 'mysql' }
       // Add more default languages as needed
     ];
 

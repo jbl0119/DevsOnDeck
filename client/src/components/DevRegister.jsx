@@ -13,7 +13,7 @@ const DevRegister = () => {
         city: "",
         state: "",
         password: "",
-        confirmPassword: ""
+        // confirmPassword: ""
     })
     const onChange = (e) => {
         setDeveloper({...Developer, [e.target.name]: e.target.value})
@@ -56,40 +56,49 @@ const DevRegister = () => {
         <div class="container px-5 my-5">
             <h1>Developer Sign Up</h1>
             <div>
-                <label for="name" class="form-label">First Name</label>
-                <input type="text" class="form-control"   name="firstName" value={Developer.firstName} onChange={onChange}/>
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control"  id="firstName" name="firstName" value={Developer.firstName} onChange={onChange}/>
+                {errors.firstName ? <p>{errors.firstName.message}</p> : null}   
             </div>
             <div>
-                <label for="name" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="name" name="lastName" value={Developer.lastName} onChange={onChange}/>
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" value={Developer.lastName} onChange={onChange}/>
+                {errors.lastName ? <p>{errors.lastName.message}</p> : null}
             </div>
             <div>
-                <label for="name" class="form-label">Email</label>
-                <input type="text" class="form-control" id="name"  name="email" value={Developer.email} onChange={onChange}/>
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email"  name="email" value={Developer.email} onChange={onChange}/>
+                {errors.email ? <p>{errors.email.message}</p> : null}
             </div>
             <div>
-                <label for="name" class="form-label">address</label>
-                <input type="text" class="form-control" id="name" name="address" value={Developer.address} onChange={onChange}/>
+                <label for="address" class="form-label">address</label>
+                <input type="text" class="form-control" id="address" name="address" value={Developer.address} onChange={onChange}/>
+                {errors.address ? <p>{errors.address.message}</p> : null}
             </div>
             <div>
-                <label for="name" class="form-label">City</label>
-                <input type="text" class="form-control" id="name" name="city" value={Developer.city} onChange={onChange}/>
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" id="city" name="city" value={Developer.city} onChange={onChange}/>
+                {errors.city ? <p>{errors.city.message}</p> : null}
             </div>
             <div>
-                <label for="name" class="form-label">State</label>
-                <select class="form-control bfh-states" data-country="US" data-state="CA" name="state" value={Developer.state} onChange={onChange}>{stateOptions.map((state) => {
+                <label for="street" class="form-label">State</label>
+                <select class="form-control bfh-states" data-country="US" data-state="CA" id="state" name="state" value={Developer.state} onChange={onChange}>{stateOptions.map((state) => {
                     return <option key={state} value={state}>{state}</option>
                 })}</select>
+                {errors.state ? <p>{errors.state.message}</p> : null}
+            </div>
+
+            <div>
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" value={Developer.password} onChange={onChange}/>
+                {errors.password ? <p>{errors.password.message}</p> : null}
             </div>
             <div>
-                <label for="name" class="form-label">Password</label>
-                <input type="password" class="form-control" id="name" name="password" value={Developer.password} onChange={onChange}/>
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value={Developer.confirmPassword} onChange={onChange}/>
+                {errors.confirmPassword ? <p>{errors.confirmPassword.message}</p> : null}
             </div>
-            <div>
-                <label for="name" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="name" name="confirmPassword" value={Developer.confirmPassword} onChange={onChange}/>
-            </div>
-            <button type="button">Register</button>
+            <button type="submit">Register</button>
         </div>
         </form>
         <a href="/OrgRegister">need to Sign Up and Organization?</a>

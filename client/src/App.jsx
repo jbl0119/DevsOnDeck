@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css'
 import DevRegister from './components/DevRegister';
+import DevSkillLanguages from './components/DevSkillLanguages';
+import DevSkillFrameworks from './components/DevSkillFrameworks';
 
 function App() {
 
@@ -12,7 +14,8 @@ function App() {
       <Routes>
         
         <Route path="/DevRegister" element={<DevRegister/>}/>
-        
+        <Route path="/Devs/Skills/Languages" element={<DevSkillLanguages/>}/>
+        <Route path="/Devs/Skills/Frameworks" element={<DevSkillFrameworks/>}/>
       </Routes>
     </div>
     </BrowserRouter>
