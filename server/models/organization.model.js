@@ -2,20 +2,26 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 
-const DeveloperSchema = new mongoose.Schema({
+const OrganizationSchema = new mongoose.Schema({
+    organizationName: {
+        type: String,
+        required: [true, "Organization name is required"],
+        minlength:[3, "Organization name must be 3 characters!"],
+        maxlength: [20, "Organization name cannot be more than 20 characters!"]
+    },
     firstName: {
         type: String,
         required: [true, "First name is required"],
         minlength:[3, "First name must be 3 characters!"],
-        maxlength: [20, "First name's length can be no more than 20 characters!"]
+        maxlength: [20, "First name cannot be more than 20 characters!"]
     },
     lastName: {
         type: String,
         required: [true, "Last name is required"],
         minlength:[3, "Last name must be 3 characters!"],
-        maxlength: [20, "Last name's length can be no more than 20 characters!"]
+        maxlength: [20, "Last name cannot be more than 20 characters!"]
     },
-    email: {
+    contactEmail: {
         type: String,
         required: [true, "Email is required"],
         validate: {
@@ -23,15 +29,15 @@ const DeveloperSchema = new mongoose.Schema({
             message: "Please enter a valid email"
         }
     },
-    address: {
+    orgAddress: {
         type: String,
         required: [true, "Address is required"],
-        maxlength: [50, "Addresss length can be no more than 50 characters!"]
+        maxlength: [50, "Addresss cannot be more than 50 characters!"]
     },
-    city: {
+    orgCity: {
         type: String,
         required: [true, "City is required"],
-        maxlength: [50, "Citys length can be no more than 50 characters!"]
+        maxlength: [50, "City cannot be more than 50 characters!"]
     },
     state: {
         type: String,
@@ -41,29 +47,28 @@ const DeveloperSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password is required"],
-        minlength: [8, "Password must be 8 characters or longer"]
+        minlength: [8, "Password must be at least 8 characters"]
     },
-    languages: [{
-        type: String,
+    Position: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Position' 
     }],
-    frameworks: [{
-        type: String,
-    }],
+    
     });
 
     
-DeveloperSchema.virtual('confirmPassword')
+OrganizationSchema.virtual('confirmPassword')
 .get( () => this._confirmPassword )
 .set( value => this._confirmPassword = value );
 // This will check if the `password` and `confirmPassword` fields are the same
-DeveloperSchema.pre('validate', function(next) {
+OrganizationSchema.pre('validate', function(next) {
     if (this.password !== this.confirmPassword) {
     this.invalidate('confirmPassword', 'Password must match confirm password');
     }
     next();
 });
 
-DeveloperSchema.pre('save', function(next) {
+OrganizationSchema.pre('save', function(next) {
     bcrypt.hash(this.password, 10)
         .then(hash => {
         this.password = hash;
@@ -71,20 +76,6 @@ DeveloperSchema.pre('save', function(next) {
         });
     });
 
-DeveloperSchema.virtual('language', {
-    ref: 'DevLanguage',
-    localField: '_id',
-    foreignField: 'developerId',
-});
-
-DeveloperSchema.virtual('framework', {
-    ref: 'DevLanguage',
-    localField: '_id',
-    foreignField: 'developerId',
-});
-
-
-
-const Developer = mongoose.model('Developer', DeveloperSchema);
- 
-module.exports = Developer;
+    
+const Organization = mongoose.model('Organization', OrganizationSchema);
+module.exports = Organization;
