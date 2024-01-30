@@ -43,10 +43,11 @@ async function preloadLanguages() {
     
 
     // Filter out languages that already exist in the database
+    console.log(defaultLanguages, "first log")
     const newLanguages = defaultLanguages.filter((defaultLang) => {
       return !existingLanguages.some((existingLang) => existingLang.name === defaultLang.name);
     });
-
+    console.log(newLanguages, "second log")
     if (newLanguages.length > 0) {
       // Insert only the new languages
       await Language.insertMany(newLanguages);
@@ -55,7 +56,7 @@ async function preloadLanguages() {
       // Touch a temporary file to trigger nodemon
       await fs.writeFile('nodemon-restart.tmp', '');
     } else {
-      console.log('No new languages to insert.');
+      console.log('No new languages to insert.', newLanguages);
     }
 
     console.log('Languages preloaded successfully.');

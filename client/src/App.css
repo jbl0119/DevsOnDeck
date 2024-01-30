@@ -64,3 +64,7 @@
 .image-radio-container input[type="radio"]:checked + img {
   border: 2px solid blue; /* Example border color */
 }
+
+.glow {
+  box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.33); /* Example box-shadow for glow effect */
+}

@@ -82,17 +82,14 @@ const DevSkillLanguages = () => {
         </div>
         <div className="row">
             {sortedLanguages.map((language) => (
-                <div key={language._id + 1} className="col-6-sm-4 col-md-2">
+                <div key={language._id + 1} className="col-6-sm-4 col-md-2 mb-2">
                 <div
-                    className={`d-flex flex-column align-items-center ${pickedLanguages.includes(language.name) ? 'selected' : ''}`}
-                    onClick={() => languagePicked(language.name)}
+                    className={`d-flex flex-column align-items-center ${pickedLanguages.includes(language.icon) ? 'selected' : ''}`}
+                    onClick={() => languagePicked(language.icon)}
                 >
-                <i
-                    name="language"
-                    className={`devicon-${language.name}-plain colored mb-2`}
-                    style={{ fontSize: '5rem' }}
-                ></i>
-                    <input type="checkbox" readOnly checked={pickedLanguages.includes(language.name)}></input>
+                <i className={`devicon-${language.icon}-plain colored mb-2 ${pickedLanguages.includes(language.icon) ? 'glow' : ''}`} style={{ fontSize: '5rem' }}></i>
+                <p className="mb-2 fs-3">{language.name}</p>
+                    <input class='d-none'type="checkbox" readOnly checked={pickedLanguages.includes(language.icon)}></input>
                 </div>
             </div>
             ))}
