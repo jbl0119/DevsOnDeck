@@ -43,6 +43,9 @@ const DeveloperSchema = new mongoose.Schema({
         required: [true, "Password is required"],
         minlength: [8, "Password must be 8 characters or longer"]
     },
+    biography:{
+        type: String,
+    },
     languages: [{
         type: String,
     }],
