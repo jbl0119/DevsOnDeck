@@ -46,6 +46,7 @@ module.exports.findOneSingleDeveloper = (req, res) => {
 
 
 
+
 module.exports.loginDeveloper = async (req, res) => {
     const { email, password } = req.body;
 
@@ -56,6 +57,7 @@ module.exports.loginDeveloper = async (req, res) => {
         res.status(401).json({ success: false, message: 'Login failed', error: error.message });
     }
 };
+
 
 
 
@@ -123,3 +125,4 @@ module.exports.findAllFramework = (req, res) => {
             res.json({ message: 'Something went wrong', error: err })
         });
 }
+
