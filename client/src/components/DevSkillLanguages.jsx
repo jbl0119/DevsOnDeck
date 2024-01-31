@@ -8,7 +8,7 @@ import axios from 'axios';
 const DevSkillLanguages = () => {
     const [pickLanguages, setPickLanguages] = useState([]);
     const [pickedLanguages, setPickedLanguages] = useState([]);
-    const [bio, setBio] = useState("");
+    const [biography, setBiography] = useState("");
     const {id} = useParams();
     const [progress, setProgress] = useState(0);
     const navigate = useNavigate()
@@ -32,11 +32,11 @@ const DevSkillLanguages = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.patch(`http://localhost:8000/api/developers/${id}`, {pickedLanguages, bio})
+        axios.patch(`http://localhost:8000/api/developers/${id}`, {pickedLanguages, biography})
             .then((res) => {
                 console.log(res);
                 if(pickedLanguages.length === 5){setPickedLanguages([]);
-                setBio("");
+                setBiography("");
                 navigate(`/devs/skills/frameworks/${id}`);} 
                 else {
                     alert("Please pick 5 languages")
@@ -92,11 +92,19 @@ const DevSkillLanguages = () => {
                 <div key={language._id + 1} className="col-6-sm-4 col-md-2 mb-2">
                 <div
                     className={`d-flex flex-column align-items-center ${pickedLanguages.includes(language.icon) ? 'selected' : ''}`}
-                    onClick={() => languagePicked(language.icon)}
+                    onClick={() => languagePicked(language._id)}
                 >
                 <i className={`devicon-${language.icon}-plain colored mb-2 ${pickedLanguages.includes(language.icon) ? 'glow' : ''}`} style={{ fontSize: '5rem' }}></i>
                 <p className="mb-2 fs-3">{language.name}</p>
-                    <input class='d-none'type="checkbox" readOnly checked={pickedLanguages.includes(language.icon)}></input>
+                <input
+                    class="d-none"
+                    type="checkbox"
+                    name="languages"
+                    id="languages"
+                    readOnly
+                    checked={pickedLanguages.includes(language.icon)}
+                    onChange={() => languagePicked(language.icon)}
+                    />
                     
                 </div>
             </div>
@@ -104,7 +112,15 @@ const DevSkillLanguages = () => {
         </div>
         <div>
             <label>Short Bio</label>
-            <textarea name="bio" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea
+                name="biography"
+                value={biography}
+                onChange={(e) => setBiography(e.target.value)}
+                className="form-control"
+                id="biography"
+                rows="3"
+                ></textarea>
+                
         </div>
 
         <div>

@@ -53,8 +53,8 @@ const DevRegister = () => {
         <>
         <div>
             <h1>DevsOnDeck</h1>
-            <Link to={'/'}><button type="button" class="btn btn-primary">DevLogin</button></Link>
-            <Link to={'/'}><button type="button" class="btn btn-primary">OrgLogin</button></Link>
+            <Link to={'/dev/login'}><button type="button" class="btn btn-primary">DevLogin</button></Link>
+            <Link to={'/org/login'}><button type="button" class="btn btn-primary">OrgLogin</button></Link>
         </div>
         <form onSubmit={onSubmit}>
         <div class="container px-5 my-5">
@@ -62,12 +62,13 @@ const DevRegister = () => {
             <div>
                 <label for="firstName" class="form-label">First Name</label>
                 <input type="text" class="form-control"  id="firstName" name="firstName" value={Developer.firstName} onChange={onChange}/>
-                {/* {errors.firstName ? <p class='text-danger'>{errors.firstName.message}</p> : null}    */}
+                {errors.firstName ? <p class='text-danger'>{errors.firstName}</p> : null}
+                
             </div>
             <div>
                 <label for="lastName" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="lastName" name="lastName" value={Developer.lastName} onChange={onChange}/>
-                {/* {errors.lastName ? <p class='text-danger'>{errors.lastName.message}</p> : null} */}
+                {errors.lastName ? <p class='text-danger'>{errors.lastName.message}</p> : null}
             </div>
             <div>
                 <label for="email" class="form-label">Email</label>

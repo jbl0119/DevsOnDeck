@@ -45,6 +45,7 @@ const DeveloperSchema = new mongoose.Schema({
     },
     biography:{
         type: String,
+        
     },
     languages: [{
         type: String, 
