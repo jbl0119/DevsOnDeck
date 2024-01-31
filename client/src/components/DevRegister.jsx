@@ -62,13 +62,17 @@ const DevRegister = () => {
             <div>
                 <label for="firstName" class="form-label">First Name</label>
                 <input type="text" class="form-control"  id="firstName" name="firstName" value={Developer.firstName} onChange={onChange}/>
+
                 {errors.firstName ? <p class='text-danger'>{errors.firstName}</p> : null}
                 
+
             </div>
             <div>
                 <label for="lastName" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="lastName" name="lastName" value={Developer.lastName} onChange={onChange}/>
+
                 {errors.lastName ? <p class='text-danger'>{errors.lastName.message}</p> : null}
+
             </div>
             <div>
                 <label for="email" class="form-label">Email</label>

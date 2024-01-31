@@ -14,6 +14,7 @@ async function preloadFrameworks() {
       { name: 'Angular', icon: 'angularjs' },
       { name: 'Django', icon: 'django' },
       { name: 'Vue.js', icon: 'vuejs' },
+
       { name: 'Node.js', icon: 'nodejs' },
       { name:'Flask', icon: 'flask' },
       { name:'Word Press', icon: 'wordpress' },
