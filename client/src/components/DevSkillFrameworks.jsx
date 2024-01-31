@@ -86,6 +86,7 @@ const DevSkillFrameworks = () => {
                     aria-valuemin="0"
                     aria-valuemax="100"
                 ></div>
+                
             </div>
         </div>
         <div className="row">
