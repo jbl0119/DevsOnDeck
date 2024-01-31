@@ -8,6 +8,7 @@ import axios from 'axios';
 const DevSkillLanguages = () => {
     const [pickLanguages, setPickLanguages] = useState([]);
     const [pickedLanguages, setPickedLanguages] = useState([]);
+
     const [biography, setBiography] = useState("");
     const {id} = useParams();
     const [progress, setProgress] = useState(0);
@@ -32,11 +33,13 @@ const DevSkillLanguages = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
+
         axios.patch(`http://localhost:8000/api/developers/${id}`, {pickedLanguages, biography})
             .then((res) => {
                 console.log(res);
                 if(pickedLanguages.length === 5){setPickedLanguages([]);
                 setBiography("");
+
                 navigate(`/devs/skills/frameworks/${id}`);} 
                 else {
                     alert("Please pick 5 languages")
@@ -105,13 +108,14 @@ const DevSkillLanguages = () => {
                     checked={pickedLanguages.includes(language.icon)}
                     onChange={() => languagePicked(language.icon)}
                     />
-                    
+                   
                 </div>
             </div>
             ))}
         </div>
         <div>
             <label>Short Bio</label>
+
             <textarea
                 name="biography"
                 value={biography}
@@ -121,7 +125,7 @@ const DevSkillLanguages = () => {
                 rows="3"
                 ></textarea>
                 
-        </div>
+       </div>
 
         <div>
             <Link to={`/devs/skills/frameworks/${id}`}><button type="button" class="btn btn-primary">Skip This Step</button></Link>

@@ -10,7 +10,9 @@ const DevSkillFrameworks = () => {
     const {id} = useParams();
     const [progress, setProgress] = useState(0);
     const navigate = useNavigate()
+
     const [errors, setErrors] = useState({})
+
 
 
     const sortedFrameworks = pickFrameworks.sort((a, b) => a.name.localeCompare(b.name));
@@ -42,7 +44,7 @@ const DevSkillFrameworks = () => {
                     else {
                         alert("Please pick 5 frameworks")
                     }
-                
+               
             })
             .catch((err) => {
                 console.log(err.response.data.errors);
@@ -54,7 +56,9 @@ const DevSkillFrameworks = () => {
         axios.get('http://localhost:8000/api/frameworks')
             .then((res) => {
                 console.log(res.data);
+
                 setPickFrameworks(res.data.frameworks);
+
             })
             .catch((err) => {
                 console.log(err);
@@ -113,6 +117,7 @@ const DevSkillFrameworks = () => {
         </div>
 
         <div>
+
             <button type="submit" class="btn btn-primary">COMPLETE PROFILE</button>
         </div>
         </form>
