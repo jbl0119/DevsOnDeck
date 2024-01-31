@@ -64,7 +64,6 @@ const DevRegister = () => {
                 <label for="firstName" class="form-label">First Name</label>
                 <input type="text" class="form-control"  id="firstName" name="firstName" value={Developer.firstName} onChange={onChange}/>
                 {errors.firstName && <p className="text-danger">{errors.firstName}</p>}
-                
             </div>
             <div>
                 <label for="lastName" class="form-label">Last Name</label>
