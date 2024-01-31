@@ -97,15 +97,3 @@ module.exports.findAllLanguages = (req, res) => {
             res.json({ message: 'Something went wrong', error: err })
         });
 }
-
-// Modules for Frameworks
-
-module.exports.findAllFramework = (req, res) => {
-    Framework.find()
-        .then((allDaFramework) => {
-            res.json({ frameworks: allDaFramework })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });
-}
