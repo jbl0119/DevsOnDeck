@@ -60,11 +60,11 @@ module.exports.loginDeveloper = async (req, res) => {
 
 
 module.exports.updateExistingDeveloper = (req, res) => {
-    const { pickedLanguages, biography } = req.body;
+    const { pickedLanguages, biography,pickedFrameworks } = req.body;
 
     Developer.findOneAndUpdate(
         { _id: req.params.id },
-        { $set: { languages: pickedLanguages, biography } }, // Update only languages and biography
+        { $set: { languages: pickedLanguages, biography, frameworks: pickedFrameworks } }, // Update only languages and biography
         { new: true, runValidators: true }
     )
     .then(updatedDeveloper => {
