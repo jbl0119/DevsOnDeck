@@ -22,26 +22,26 @@ module.exports.findOneSingleDeveloper = (req, res) => {
             res.json({ message: 'Something went wrong', error: err })
         });}
 
-module.exports.registerDeveloper = async (req, res) => {
-    const registrationData = req.body;
-
-    try {
-        await Developer.validateRegistration(registrationData);
-        const newDeveloper = new Developer(registrationData);
-        await newDeveloper.save();
-        res.json({ success: true, message: 'Registration successful', developer: newDeveloper.toJSON() });
-    } catch (error) {
-        if (error.errors) {  // Check if the error has a 'errors' property
-            const detailedErrors = {};
-            for (const field in error.errors) {
-                detailedErrors[field] = error.errors[field].message;
+    module.exports.registerDeveloper = async (req, res) => {
+        const registrationData = req.body;
+        
+        try {
+            await Developer.validateRegistration(registrationData);
+            const newDeveloper = new Developer(registrationData);
+            await newDeveloper.save();
+            res.json({ success: true, message: 'Registration successful', developer: newDeveloper.toJSON() });
+        } catch (error) {
+            if (error.errors) {  // Check if the error has a 'errors' property
+                const detailedErrors = {};
+                for (const field in error.errors) {
+                    detailedErrors[field] = error.errors[field].message;
+                }
+                res.status(400).json({ success: false, message: 'Registration failed', error: detailedErrors });
+            } else {
+                res.status(400).json({ success: false, message: 'Registration failed', error: error.message });
             }
-            res.status(400).json({ success: false, message: 'Registration failed', error: detailedErrors });
-        } else {
-            res.status(400).json({ success: false, message: 'Registration failed', error: error.message });
         }
-    }
-};
+    };
 
 
 
@@ -59,20 +59,34 @@ module.exports.loginDeveloper = async (req, res) => {
 
 
 
-module.exports.updateExistingDeveloper = (req, res) => {
-    const { pickedLanguages, biography } = req.body;
-
-    Developer.findOneAndUpdate(
+module.exports.updateExistingDeveloper = async (req, res) => {
+    const { pickedLanguages, biography, pickedFrameworks } = req.body;
+    if(pickedLanguages){
+        await Developer.findOneAndUpdate(
         { _id: req.params.id },
         { $set: { languages: pickedLanguages, biography } }, // Update only languages and biography
         { new: true, runValidators: true }
-    )
-    .then(updatedDeveloper => {
-        res.json({ developer: updatedDeveloper })
-    })
-    .catch((err) => {
-        res.json({ message: 'Something went wrong', error: err })
-    });
+        )
+        .then(updatedDeveloper => {
+            res.json({ developer: updatedDeveloper })
+        })
+        .catch((err) => {
+            res.json({ message: 'Something went wrong', error: err })
+        });
+    }
+    else {
+        await Developer.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: { frameworks: pickedFrameworks} }, // Update only frameworks
+        { new: true, runValidators: true }
+        )
+        .then(updatedDeveloper => {
+            res.json({ developer: updatedDeveloper })
+        })
+        .catch((err) => {
+            res.json({ message: 'Something went wrong', error: err })
+        });
+    }
 }
 
 

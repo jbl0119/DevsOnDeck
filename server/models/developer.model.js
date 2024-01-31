@@ -48,10 +48,12 @@ const DeveloperSchema = new mongoose.Schema({
         
     },
     languages: [{
-        type: String, 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Language',
     }],
     frameworks: [{
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Framework',
     }],
     });
 

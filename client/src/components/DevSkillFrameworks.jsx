@@ -32,12 +32,12 @@ const DevSkillFrameworks = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.patch(`http://localhost:8000/api/developers/${id}`, pickedFrameworks)
+        axios.patch(`http://localhost:8000/api/developers/${id}`, {pickedFrameworks: pickedFrameworks})
             .then((res) => {
                 console.log(res);
                 if(pickedFrameworks.length === 5){setPickedFrameworks([]);
-                    setPickedFrameworks([]);
-                    // navigate('/devs/login');
+                    navigate('/devs/register');
+                    
                 } 
                     else {
                         alert("Please pick 5 frameworks")
@@ -66,7 +66,7 @@ const DevSkillFrameworks = () => {
         <>
         <div>
             <h1>DevsOnDeck</h1>
-            <Link to={'/'}><button type="button" class="btn btn-primary">Logout</button></Link>
+            <Link to={'/devs/register'}><button type="button" class="btn btn-primary">Logout</button></Link>
         </div>
 
         <div class="container px-5 my-5">
@@ -90,12 +90,20 @@ const DevSkillFrameworks = () => {
             {sortedFrameworks.map((framework) => (
                 <div key={framework._id + 1} className="col-6-sm-4 col-md-2 mb-2">
                 <div
-                    className={`d-flex flex-column align-items-center ${pickedFrameworks.includes(framework.icon) ? 'selected' : ''}`}
-                    onClick={() => frameworkPicked(framework.icon)}
+                    className={`d-flex flex-column align-items-center ${pickedFrameworks.includes(framework._id) ? 'selected' : ''}`}
+                    onClick={() => frameworkPicked(framework._id)}
                 >
-                <i className={`devicon-${framework.icon}-plain colored mb-2 ${pickedFrameworks.includes(framework.icon) ? 'glow' : ''}`} style={{ fontSize: '5rem' }}></i>
+                <i className={`devicon-${framework.icon}-plain colored mb-2 ${pickedFrameworks.includes(framework._id) ? 'glow' : ''}`} style={{ fontSize: '5rem' }}></i>
                 <p className="mb-2 fs-3">{framework.name}</p>
-                    <input class='d-none'type="checkbox" name="frameworks" id="frameworks" readOnly checked={pickedFrameworks.includes(framework.icon)}></input>
+                <input
+                    class="d-none"
+                    type="checkbox"
+                    name="frameworks"
+                    id="frameworks"
+                    readOnly
+                    checked={pickedFrameworks.includes(framework.icon)}
+                    onChange={() => frameworkPicked(framework.icon)}
+                    />
                 </div>
             </div>
             ))}
