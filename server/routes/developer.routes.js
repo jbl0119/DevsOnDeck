@@ -6,7 +6,8 @@ module.exports = (app) => {
     app.get('/api/developers/:id', DeveloperController.findOneSingleDeveloper);
     app.patch('/api/developers/:id', DeveloperController.updateExistingDeveloper);
     app.delete('/api/developers/:id', DeveloperController.deleteAnExistingDeveloper);
-    app.get('/api/languages', DeveloperController.findAllLanguages);    
+    app.get('/api/languages', DeveloperController.findAllLanguages);   
+    app.get('/api/frameworks', DeveloperController.findAllFramework);   
     app.post('/api/developers/register', DeveloperController.registerDeveloper);
     app.post('/api/developers/login', DeveloperController.loginDeveloper);
 }

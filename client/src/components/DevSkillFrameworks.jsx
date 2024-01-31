@@ -11,6 +11,10 @@ const DevSkillFrameworks = () => {
     const [progress, setProgress] = useState(0);
     const navigate = useNavigate()
 
+    const [errors, setErrors] = useState({})
+
+
+
     const sortedFrameworks = pickFrameworks.sort((a, b) => a.name.localeCompare(b.name));
 
 
@@ -30,11 +34,18 @@ const DevSkillFrameworks = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/frameworks', pickedFrameworks)
+
+        axios.patch(`http://localhost:8000/api/developers/${id}`, pickedFrameworks)
             .then((res) => {
                 console.log(res);
-                navigate('/');
-                setPickedFrameworks({framework: ""});
+                if(pickedFrameworks.length === 5){setPickedFrameworks([]);
+                    setPickedFrameworks([]);
+                    // navigate('/devs/login');
+                } 
+                    else {
+                        alert("Please pick 5 frameworks")
+                    }
+               
             })
             .catch((err) => {
                 console.log(err.response.data.errors);
@@ -46,7 +57,9 @@ const DevSkillFrameworks = () => {
         axios.get('http://localhost:8000/api/frameworks')
             .then((res) => {
                 console.log(res.data);
-                setPickFrameworks(res.data);
+
+                setPickFrameworks(res.data.frameworks);
+
             })
             .catch((err) => {
                 console.log(err);
@@ -87,7 +100,8 @@ const DevSkillFrameworks = () => {
                 >
                 <i className={`devicon-${framework.icon}-plain colored mb-2 ${pickedFrameworks.includes(framework.icon) ? 'glow' : ''}`} style={{ fontSize: '5rem' }}></i>
                 <p className="mb-2 fs-3">{framework.name}</p>
-                    <input class='d-none'type="checkbox" readOnly checked={pickedFrameworks.includes(framework.icon)}></input>
+                    <input class='d-none'type="checkbox" name="frameworks" id="frameworks" readOnly checked={pickedFrameworks.includes(framework.icon)}></input>
+
                 </div>
             </div>
             ))}
@@ -97,7 +111,8 @@ const DevSkillFrameworks = () => {
         </div>
 
         <div>
-            <Link to={'/Devs/Skills/Frameworks'}><button type="button" class="btn btn-primary">COMPLETE PROFILE</button></Link>
+
+            <button type="submit" class="btn btn-primary">COMPLETE PROFILE</button>
         </div>
         </form>
         </>

@@ -42,6 +42,10 @@ module.exports.registerDeveloper = async (req, res) => {
         }
     }
 };
+
+
+
+
 module.exports.loginDeveloper = async (req, res) => {
     const { email, password } = req.body;
 
@@ -56,17 +60,21 @@ module.exports.loginDeveloper = async (req, res) => {
 
 
 module.exports.updateExistingDeveloper = (req, res) => {
+    const { pickedLanguages, biography } = req.body;
+
     Developer.findOneAndUpdate(
         { _id: req.params.id },
-        req.body,
+        { $set: { languages: pickedLanguages, biography } }, // Update only languages and biography
         { new: true, runValidators: true }
     )
-        .then(updatedDeveloper => {
-            res.json({ developer: updatedDeveloper })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });}
+    .then(updatedDeveloper => {
+        res.json({ developer: updatedDeveloper })
+    })
+    .catch((err) => {
+        res.json({ message: 'Something went wrong', error: err })
+    });
+}
+
 
 module.exports.deleteAnExistingDeveloper = (req, res) => {
     Developer.deleteOne({ _id: req.params.id })
@@ -93,7 +101,7 @@ module.exports.findAllLanguages = (req, res) => {
 // Modules for Frameworks
 
 module.exports.findAllFramework = (req, res) => {
-    Language.find()
+    Framework.find()
         .then((allDaFramework) => {
             res.json({ frameworks: allDaFramework })
         })
