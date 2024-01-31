@@ -24,10 +24,10 @@ const DevRegister = () => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8000/api/Developers', Developer)
+        axios.post('http://localhost:8000/api/developers/register', Developer)
             .then((res) => {
                 console.log(res)
-                navigate('/')
+                if (res.data.developer._id) {
                 setDeveloper({
                     firstName: "",
                     lastName: "",
@@ -38,7 +38,10 @@ const DevRegister = () => {
                     password: "",
                     confirmPassword: ""
                 })
-                })
+                navigate(`/devs/skills/languages/${res.data.developer._id}`)
+            } else {
+                setErrors(res.data.errors)
+            }})
             .catch((err) => {
                 console.log(err.response.data.errors)
                 setErrors(err.response.data.errors)
@@ -102,7 +105,7 @@ const DevRegister = () => {
             <button type="submit">Register</button>
         </div>
         </form>
-        <a href="/OrgRegister">need to Sign Up and Organization?</a>
+        <a href="/Orgs/Register">need to Sign Up and Organization?</a>
         </>
     )
 }

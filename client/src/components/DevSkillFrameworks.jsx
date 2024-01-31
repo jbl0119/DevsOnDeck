@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
@@ -7,7 +7,9 @@ import axios from "axios";
 const DevSkillFrameworks = () => {
     const [pickedFrameworks, setPickedFrameworks] = useState([]);
     const [pickFrameworks, setPickFrameworks] = useState([]);
+    const {id} = useParams();
     const [progress, setProgress] = useState(0);
+    const navigate = useNavigate()
 
     const sortedFrameworks = pickFrameworks.sort((a, b) => a.name.localeCompare(b.name));
 

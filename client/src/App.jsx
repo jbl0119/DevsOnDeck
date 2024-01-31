@@ -15,11 +15,11 @@ function App() {
     <div> 
       <Routes>
         
-        <Route path="/DevRegister" element={<DevRegister/>}/>
+        <Route path="/devs/register" element={<DevRegister/>}/>
         <Route path="/orgs/register" element={<OrgRegister/>}/>
         <Route path="/orgs/dashboard" element={<OrgPage/>}/>
-        <Route path="/Devs/Skills/Languages" element={<DevSkillLanguages/>}/>
-        <Route path="/Devs/Skills/Frameworks" element={<DevSkillFrameworks/>}/>
+        <Route path="/devs/skills/languages/:id" element={<DevSkillLanguages/>}/>
+        <Route path="/devs/skills/frameworks/:id" element={<DevSkillFrameworks/>}/>
       </Routes>
     </div>
     </BrowserRouter>
