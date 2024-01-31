@@ -10,30 +10,19 @@ async function preloadFrameworks() {
 
     // Define default frameworks
     const defaultFrameworks = [
-      { name: 'React.js' },
-      { name: 'Angular' },
-      { name: 'Django' },
-      { name: 'Vue.js' },
-      { name: 'Express.js' },
-      {name:'Ruby on Rails'},
-      {name:'Flask'},
-      {name:'Spring Boot'},
-      {name:'ASP.NET'},
-      {name:'JavaServer Faces (JSF)'},
-      {name:'Apache Struts'},
-      {name:'Play Framework'},
-      {name:'Sinatra'},
-      {name:'Hanami'},
-      {name:'Unity'},
-      {name:'Unreal Engine'},
-      {name:'Phaser'},
-      {name:'Socket.IO'},
-      {name:'Django Channels'},
-      {name:'SignalR'},
-      {name:'Laravel'},
-      {name:'Symfony'},
-      {name:'CodeIgniter'},
-
+      { name: 'React.js', icon: 'react' },
+      { name: 'Angular', icon: 'angularjs' },
+      { name: 'Django', icon: 'django' },
+      { name: 'Vue.js', icon: 'vuejs' },
+      { name: 'Express.js', icon: 'express' },
+      { name:'Flask', icon: 'flask' },
+      { name:'Spring Boot', icon: 'spring' },
+      { name:'Apache Struts', icon: 'apache' },
+      { name:'Unity', icon: 'unity' },
+      { name:'Unreal Engine', icon: 'unrealengine' },
+      { name:'Socket.IO', icon: 'socketio' },
+      { name:'Laravel', icon: 'laravel' },
+      { name:'Symfony', icon: 'symfony' },
       // Add more default frameworks as needed
     ];
 

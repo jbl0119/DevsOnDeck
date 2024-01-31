@@ -5,17 +5,21 @@ import './App.css'
 import DevRegister from './components/DevRegister';
 import OrgRegister from './components/OrgRegister';
 import OrgPage from './components/OrgPage.jsx';
+import DevSkillLanguages from './components/DevSkillLanguages';
+import DevSkillFrameworks from './components/DevSkillFrameworks';
 
 function App() {
-  
+
   return (
     <BrowserRouter>
     <div> 
       <Routes>
         
-        <Route path="/DevRegister" element={<DevRegister/>}/>
+        <Route path="/devs/register" element={<DevRegister/>}/>
         <Route path="/orgs/register" element={<OrgRegister/>}/>
         <Route path="/orgs/dashboard" element={<OrgPage/>}/>
+        <Route path="/devs/skills/languages/:id" element={<DevSkillLanguages/>}/>
+        <Route path="/devs/skills/frameworks/:id" element={<DevSkillFrameworks/>}/>
       </Routes>
     </div>
     </BrowserRouter>

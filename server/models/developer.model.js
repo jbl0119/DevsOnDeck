@@ -47,7 +47,7 @@ const DeveloperSchema = new mongoose.Schema({
         type: String,
     },
     languages: [{
-        type: String,
+        type: String, 
     }],
     frameworks: [{
         type: String,
