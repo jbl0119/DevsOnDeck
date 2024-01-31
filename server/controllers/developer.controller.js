@@ -3,15 +3,6 @@ const Language =  require('../models/language.model');
 const Framework = require('../models/framework.model');
 
 
-module.exports.findAllLanguages = (req, res) => {
-    Language.find()
-        .then((allDaLanguages) => {
-            res.json({ languages: allDaLanguages })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });
-}
 module.exports.findAllDevelopers = (req, res) => {
     Developer.find()
         .then((allDaDevelopers) => {
@@ -31,40 +22,38 @@ module.exports.findOneSingleDeveloper = (req, res) => {
             res.json({ message: 'Something went wrong', error: err })
         });}
 
-module.exports.createNewDeveloper = async (req, res) => {
+module.exports.registerDeveloper = async (req, res) => {
+    const registrationData = req.body;
+
     try {
-        // Extract languages array from request body
-        const { languages, frameworks, ...developerData } = req.body;
-
-        // Validate that languages is an array
-        if (!Array.isArray(languages) || languages.length === 0) {
-            return res.status(400).json({ message: 'Languages must be a non-empty array' });
-        }
-        
-        if (!Array.isArray(frameworks) || frameworks.length === 0) {
-            return res.status(400).json({ message: 'Frameworks must be a non-empty array' });
-        }
-
-
-        // Create new developer with other fields
-        const newDeveloper = new Developer({
-            ...developerData,
-            languages: languages,
-            frameworks: frameworks,
-        });
-
-        // Save the document to ensure virtuals are populated
+        await Developer.validateRegistration(registrationData);
+        const newDeveloper = new Developer(registrationData);
         await newDeveloper.save();
-
-        // Respond with the array of languages
-        res.json({ developer: { ...newDeveloper.toJSON(), languages: languages,frameworks: frameworks } });
-        console.log(languages);
-        console.log(frameworks);
-        console.log(newDeveloper);
-    } catch (err) {
-        res.status(500).json({ message: 'Something went wrong', error: err });
+        res.json({ success: true, message: 'Registration successful', developer: newDeveloper.toJSON() });
+    } catch (error) {
+        if (error.errors) {  // Check if the error has a 'errors' property
+            const detailedErrors = {};
+            for (const field in error.errors) {
+                detailedErrors[field] = error.errors[field].message;
+            }
+            res.status(400).json({ success: false, message: 'Registration failed', error: detailedErrors });
+        } else {
+            res.status(400).json({ success: false, message: 'Registration failed', error: error.message });
+        }
     }
 };
+module.exports.loginDeveloper = async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const developer = await Developer.validateLogin(email, password);
+        res.json({ success: true, message: 'Login successful', developer: developer.toJSON() });
+    } catch (error) {
+        res.status(401).json({ success: false, message: 'Login failed', error: error.message });
+    }
+};
+
+
 
 module.exports.updateExistingDeveloper = (req, res) => {
     Developer.findOneAndUpdate(
@@ -87,3 +76,16 @@ module.exports.deleteAnExistingDeveloper = (req, res) => {
         .catch((err) => {
             res.json({ message: 'Something went wrong', error: err })
         });}
+
+
+// Modules for Languages
+
+module.exports.findAllLanguages = (req, res) => {
+    Language.find()
+        .then((allDaLanguages) => {
+            res.json({ languages: allDaLanguages })
+        })
+        .catch((err) => {
+            res.json({ message: 'Something went wrong', error: err })
+        });
+}
