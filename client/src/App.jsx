@@ -3,10 +3,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.css'
 import DevRegister from './components/DevRegister';
-import OrgRegister from './components/OrgRegister';
-import OrgPage from './components/OrgPage.jsx';
+import DevLogin from './components/DevLogin';
+import DevDashboard from './components/DevDashboard';
 import DevSkillLanguages from './components/DevSkillLanguages';
 import DevSkillFrameworks from './components/DevSkillFrameworks';
+
+import OrgRegister from './components/OrgRegister';
+import OrgPage from './components/OrgPage.jsx';
+
 
 function App() {
 
@@ -15,6 +19,8 @@ function App() {
     <div> 
       <Routes>
         
+        <Route index element={<DevLogin/>}/>
+        <Route path="/devs/dashboard" element={<DevDashboard/>}/>
         <Route path="/devs/register" element={<DevRegister/>}/>
         <Route path="/orgs/register" element={<OrgRegister/>}/>
         <Route path="/orgs/dashboard" element={<OrgPage/>}/>
