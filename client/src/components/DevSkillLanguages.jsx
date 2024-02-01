@@ -67,36 +67,34 @@ const DevSkillLanguages = () => {
 
     return (
         <>
-        <header class="d-flex justify-content-space-evenly">
-            <h1>DevsOnDeck</h1>
-            <Link to={'/devs/register'}><button type="button" class="btn btn-primary">Logout</button></Link>
+        <header class="bg-warning mb-3 d-flex align-items-center justify-content-between">
+            <h1 class='display-2'>DevsOnDeck</h1>
+            <Link to={'/devs/register'}><button type="button" class="btn btn-dark btn-lg m-2">Logout</button></Link>
         </header>
-
-        <div class="container px-5 my-5">
-            <h1>Add Your Skills</h1>
-            <h2>Pick your top 5 languages</h2>
-
-        </div>
         <form onSubmit={onSubmit}>
-        <div class="container px-5 my-5">
-            <div class="progress">
+        <div class="container border border-dark rounded mb-3">
+
+            <div class=' bg-info row mb-3 align-items-center justify-content-evenly'>
+            <h1 class='col-sm-3 display-4'>Add Your Skills</h1>
+            <div class="progress col-sm-6" style={{height: '3em'}}>
                 <div
                     className="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar"
-                    style={{ width: `${progress}%` }}
+                    style={{ width: `${progress}%`}}
                     aria-valuenow={progress}
                     aria-valuemin="0"
                     aria-valuemax="100"
-                ></div>
+                    >{progress}%</div>
+                </div>
             </div>
-        </div>
+                    <h2 class='display-1 mb-4'>Pick your top 5 languages</h2>
         <div className="row">
             {sortedLanguages.map((language) => (
                 <div key={language._id + 1} className="col-6-sm-4 col-md-2 mb-2">
                 <div
                     className={`d-flex flex-column align-items-center ${pickedLanguages.includes(language._id) ? 'selected' : ''}`}
                     onClick={() => languagePicked(language._id)}
-                >
+                    >
                 <i className={`devicon-${language.icon}-plain colored mb-2 ${pickedLanguages.includes(language._id) ? 'glow' : ''}`} style={{ fontSize: '5rem' }}></i>
                 <p className="mb-2 fs-3">{language.name}</p>
                 <input
@@ -108,29 +106,30 @@ const DevSkillLanguages = () => {
                     checked={pickedLanguages.includes(language.icon)}
                     onChange={() => languagePicked(language.icon)}
                     />
-                   
                 </div>
             </div>
             ))}
         </div>
         <div>
-            <label>Short Bio</label>
+            <label class="mt-4"><h2>Short Bio</h2></label>
 
             <textarea
                 name="biography"
                 value={biography}
                 onChange={(e) => setBiography(e.target.value)}
-                className="form-control"
+                className="form-control border-dark mb-3"
+                placeholder='Tell us about yourself!'
                 id="biography"
                 rows="3"
                 ></textarea>
-                
-       </div>
-
-        <div>
-            <Link to={`/devs/skills/frameworks/${id}`}><button type="button" class="btn btn-primary">Skip This Step</button></Link>
-            <button type="submit" class="btn btn-primary">NEXT STEP: Frameworks & Libraries</button>
         </div>
+                
+
+        <div class='mb-3'>
+            <Link to={`/devs/skills/frameworks/${id}`}><button type="button" class="btn btn-primary">Skip This Step</button></Link>
+            <button type="submit" class="btn btn-primary m-3">NEXT STEP: Frameworks & Libraries</button>
+        </div>
+                </div>
         </form>
         </>
     );

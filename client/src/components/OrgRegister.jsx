@@ -54,8 +54,8 @@ const OrgRegister = () => {
         <div class="bg-warning mb-3 d-flex align-items-center justify-content-between">
             <h1 class="display-2 ">DevsOnDeck</h1>
             <div>
-            <Link to={'/dev/login'}><button type="button" class="btn btn-dark btn-lg m-2">DevLogin</button></Link>
-            <Link to={'/org/login'}><button type="button" class="btn btn-dark btn-lg m-2">OrgLogin</button></Link>
+            <Link to={'/'}><button type="button" class="btn btn-dark btn-lg m-2">DevLogin</button></Link>
+            <Link to={'/orgs/login'}><button type="button" class="btn btn-dark btn-lg m-2">OrgLogin</button></Link>
             </div>
         </div>
         <form onSubmit={onSubmit}>
@@ -119,9 +119,6 @@ const OrgRegister = () => {
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="mt-2 btn btn-success btn-lg">Register</button>
-            </div>
-            <div>
-                <input type='submit' value='Register'/>
             </div>
             </div>
         </form>

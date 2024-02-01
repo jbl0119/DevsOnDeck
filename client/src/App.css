@@ -10,3 +10,8 @@
 .glow {
   box-shadow: 0 0 15px 10px rgba(0, 0, 0, 0.33); /* Example box-shadow for glow effect */
 }
+
+.custom-progress-bar {
+  height: 2em; /* Double the height */
+  width: 50%; /* Half the width */
+}

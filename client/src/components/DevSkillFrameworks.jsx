@@ -66,18 +66,18 @@ const DevSkillFrameworks = () => {
 
     return (
         <>
-        <div>
-            <h1>DevsOnDeck</h1>
-            <Link to={'/devs/register'}><button type="button" class="btn btn-primary">Logout</button></Link>
-        </div>
+        <header class="bg-warning mb-3 d-flex align-items-center justify-content-between">
+            <h1 class='display-2'>DevsOnDeck</h1>
+            <Link to={'/devs/register'}><button type="button" class="btn btn-dark btn-lg m-2">Logout</button></Link>
+        </header>
 
-        <div class="container px-5 my-5">
-            <h1>Add Your Skills</h1>
-            <h2>Pick your top 5 Frameworks or libraries</h2>
-        </div>
         <form onSubmit={onSubmit}>
-        <div class="container px-5 my-5">
-            <div class="progress">
+
+        <div class="container border border-dark rounded mb-3">
+        <div class=' bg-info row mb-3 align-items-center justify-content-evenly'>
+            <h1 class='col-sm-3 display-4'>Add Your Skills</h1>
+        
+            <div class="progress col-sm-6" style={{height: '3em'}}>
                 <div
                     className="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar"
@@ -85,17 +85,18 @@ const DevSkillFrameworks = () => {
                     aria-valuenow={progress}
                     aria-valuemin="0"
                     aria-valuemax="100"
-                ></div>
-
-            </div>
+                    >{progress}%</div>
+                    </div>
+            
         </div>
+                    <h2 class='display-2 mb-4'>Pick your top 5 Frameworks or libraries</h2>
         <div className="row">
             {sortedFrameworks.map((framework) => (
                 <div key={framework._id + 1} className="col-6-sm-4 col-md-2 mb-2">
                 <div
                     className={`d-flex flex-column align-items-center ${pickedFrameworks.includes(framework._id) ? 'selected' : ''}`}
                     onClick={() => frameworkPicked(framework._id)}
-                >
+                    >
                 <i className={`devicon-${framework.icon}-plain colored mb-2 ${pickedFrameworks.includes(framework._id) ? 'glow' : ''}`} style={{ fontSize: '5rem' }}></i>
                 <p className="mb-2 fs-3">{framework.name}</p>
                 <input
@@ -112,13 +113,14 @@ const DevSkillFrameworks = () => {
             ))}
         </div>
         <div>
-            <p class="fs-2">"you miss 100% of the shots you don't take. -wayne gretzky" - Michael Scott </p>
+            <label class="mt-4"><h2>Inspirational quotes:</h2></label>
+            <p class='fs-2'>"Coding is not just about building things; it's about creating possibilities, solving problems, and shaping the future." <br></br>-ChatGPT</p>
+            <p class="fs-2">"you miss 100% of the shots you don't take. -wayne gretzky" <br></br>- Michael Scott </p>
         </div>
-
         <div>
-
-            <button type="submit" class="btn btn-primary">COMPLETE PROFILE</button>
+            <button type="submit" class="btn btn-primary mb-4 mt-3">COMPLETE PROFILE</button>
         </div>
+            </div>
         </form>
         </>
     );
