@@ -7,6 +7,7 @@ module.exports = app => {
     app.get('/api/organizations', OrganizationController.findAllOrganizations);
     app.get('/api/organizations/:id', OrganizationController.findOneOrganization);
     app.get('/api/positions', OrganizationController.findAllPositions);
+    app.get('/api/positions/:id', OrganizationController.findOnePosition);
 
     // UPDATE ROUTE
     app.patch('/api/organizations/:id', OrganizationController.updateExistingOrganization);
