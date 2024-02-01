@@ -10,4 +10,5 @@ module.exports = (app) => {
     app.get('/api/frameworks', DeveloperController.findAllFramework);   
     app.post('/api/developers/register', DeveloperController.registerDeveloper);
     app.post('/api/developers/login', DeveloperController.loginDeveloper);
+    app.post ('/api/logout',  DeveloperController.logOutDeveloper);  
 }

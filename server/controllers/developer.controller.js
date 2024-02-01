@@ -58,7 +58,17 @@ module.exports.loginDeveloper = async (req, res) => {
     }
 };
 
+module.exports.logOutDeveloper = (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
 
+        // Send a success message
+        res.json({ msg: 'Logout successful!' });
+    });
+};
 
 
 module.exports.updateExistingDeveloper = async (req, res) => {
@@ -138,14 +148,3 @@ module.exports.findAllFramework = (req, res) => {
 }
 
 
-// Modules for Frameworks
-
-module.exports.findAllFramework = (req, res) => {
-    Language.find()
-        .then((allDaFramework) => {
-            res.json({ frameworks: allDaFramework })
-        })
-        .catch((err) => {
-            res.json({ message: 'Something went wrong', error: err })
-        });
-}
