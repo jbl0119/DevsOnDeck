@@ -23,18 +23,15 @@ function App() {
     <BrowserRouter>
     <div> 
       <Routes>
-        
         <Route index element={<DevLogin/>}/>
-
-         <Route path="/devs/dashboard/:id" element={<DevDashboard/>}/>
-         <Route path="/devs/register" element={<DevRegister/>}/>
-         <Route path="/orgs/register" element={<OrgRegister/>}/>
-         <Route path="/orgs/login" element={<OrgLogin/>}/>
-         <Route path="/orgs/dashboard/:id" element={<OrgPage/>}/>
-         <Route path="/orgs/jobs/add" element={<AddPosition/>}/>
-         <Route path="/devs/skills/languages/:id" element={<DevSkillLanguages/>}/>
-         <Route path="/devs/skills/frameworks/:id" element={<DevSkillFrameworks/>}/>
-
+        <Route path="/devs/dashboard/:id" element={<DevDashboard/>}/>
+        <Route path="/devs/register" element={<DevRegister/>}/>
+        <Route path="/orgs/register" element={<OrgRegister/>}/>
+        <Route path="/orgs/login" element={<OrgLogin/>}/>
+        <Route path="/orgs/dashboard/:id" element={<OrgPage/>}/>
+        <Route path="/orgs/jobs/add" element={<AddPosition/>}/>
+        <Route path="/devs/skills/languages/:id" element={<DevSkillLanguages/>}/>
+        <Route path="/devs/skills/frameworks/:id" element={<DevSkillFrameworks/>}/>
       </Routes>
     </div>
     </BrowserRouter>
