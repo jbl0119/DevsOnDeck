@@ -46,7 +46,29 @@ module.exports.findAllOrganizations = (req, res) => {
             res.json({ message: 'Something went wrong', error: err })
         });
 }
+module.exports.loginOrganization = async (req, res) => {
+    const loginData = req.body;
 
+    try {
+        const user = await Organization.validateLogin(loginData);
+        res.json({ success: true, message: 'Login successful', user: user.toJSON() });
+    } catch (error) {
+        const detailedErrors = {};
+        
+        if (error.message === "User not found" || error.message === "Invalid password") {
+            detailedErrors.contactEmail = "User not found";
+            detailedErrors.password = "Invalid password";
+        } else if (error.errors) {
+            for (const field in error.errors) {
+                detailedErrors[field] = error.errors[field].message;
+            }
+        } else {
+            detailedErrors.general = error.message;
+        }
+
+        res.status(400).json({ success: false, message: 'Login failed', error: detailedErrors });
+    }
+};
 //READ - FIND ONE ORGANIZATION BY ID
 module.exports.findOneOrganization = (req, res) => {
     Organization.findOne({ _id: req.params.id })

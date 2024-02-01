@@ -89,15 +89,14 @@ DeveloperSchema.virtual('framework', {
     foreignField: 'developerId',
 });
 
-// Static method to validate login credentials
-DeveloperSchema.statics.validateLogin = async function (email, password) {
-    const user = await this.findOne({ email });
+DeveloperSchema.statics.validateLogin = async function (loginData) {
+    const user = await this.findOne({ email: loginData.email });
 
     if (!user) {
         throw new Error("User not found");
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(loginData.password, user.password);
 
     if (!passwordMatch) {
         throw new Error("Invalid password");
@@ -106,17 +105,15 @@ DeveloperSchema.statics.validateLogin = async function (email, password) {
     return user;
 };
 
+
 // Static method to validate registration data
 DeveloperSchema.statics.validateRegistration = async function (registrationData) {
     // Validate registration data here
-
-    // For example, check if the email is unique
     const existingUser = await this.findOne({ email: registrationData.email });
     if (existingUser) {
         throw new Error("Email is already registered");
     }
 
-    // Add more validation logic as needed
 
     return true; // Return true if validation passes
 };

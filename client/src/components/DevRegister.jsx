@@ -46,7 +46,6 @@ const DevRegister = () => {
                 console.log(err.response.data.error)
                 setErrors(err.response.data.error)
             })
-
     }
     
     return (
@@ -54,8 +53,8 @@ const DevRegister = () => {
         
         <div>
             <h1>DevsOnDeck</h1>
-            <Link to={'/devs/login'}><button type="button" class="btn btn-primary">DevLogin</button></Link>
-            <Link to={'/orgs/login'}><button type="button" class="btn btn-primary">OrgLogin</button></Link>
+            <Link to={'/dev/login'}><button type="button" class="btn btn-primary">DevLogin</button></Link>
+            <Link to={'/org/login'}><button type="button" class="btn btn-primary">OrgLogin</button></Link>
         </div>
         <form onSubmit={onSubmit}>
         <div class="container px-5 my-5">
@@ -106,7 +105,7 @@ const DevRegister = () => {
             <button type="submit">Register</button>
         </div>
         </form>
-        <a href="/orgs/register">need to Sign Up and Organization?</a>
+        <a href="/Orgs/Register">need to Sign Up and Organization?</a>
         </>
     )
 }
