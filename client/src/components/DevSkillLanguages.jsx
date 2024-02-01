@@ -81,7 +81,7 @@ const DevSkillLanguages = () => {
         <div class="container px-5 my-5">
             <div class="progress">
                 <div
-                    className="progress-bar"
+                    className="progress-bar progress-bar-striped progress-bar-animated"
                     role="progressbar"
                     style={{ width: `${progress}%` }}
                     aria-valuenow={progress}
