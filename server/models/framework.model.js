@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const FrameworkSchema = new mongoose.Schema({
     name: { type: String},
+    icon: { type: String},
 })
 FrameworkSchema.virtual('developer', {
     ref: 'DevLanguage',

@@ -9,38 +9,45 @@ async function preloadLanguages() {
 
     // Define default languages
     const defaultLanguages = [
-      {name:'C'},
-      {name:'C++'},
-      {name:'Java'},
-      {name:'C#'},
-      {name:'Swift'},
-      {name:'HTML'},
-      {name:'CSS'},
-      {name:'JavaScript'},
-      {name:'PHP'},
-      {name:'Ruby on Rails'},
-      {name:'ASP.NET'},
-      {name:'TypeScript'},
-      {name:'Kotlin'},
-      {name:'Python'},
-      {name:'Ruby'},
-      {name:'F#'},
-      {name:'SQL'},
-      {name:'PL/SQL'},
-      {name:'Assembly'},
-      {name:'R'},
-      {name:'XML'},
-      {name:'JSON'},
-      {name:'YAML'},
-      
+      {name:'C', icon: 'c'},
+      {name:'C++', icon: 'cplusplus'},
+      {name:'Java', icon: 'java'},
+      {name:'C#' , icon: 'csharp'},
+      {name:'Swift' , icon: 'swift'},
+      {name:'HTML' , icon: 'html5'},
+      {name:'CSS' , icon: 'css3'},
+      {name:'JavaScript' , icon: 'javascript'},
+      {name:'PHP' , icon: 'php'},
+      {name:'TypeScript', icon: 'typescript'},
+      {name:'Kotlin' , icon: 'kotlin'},
+      {name:'Python' , icon: 'python'},
+      {name:'Ruby' , icon: 'ruby'},
+      {name:'F#' , icon: 'fsharp'},
+      {name:'MySQL', icon: 'mysql'},
+      {name:'R' , icon: 'r'},
+      {name:'Go' , icon: 'go'},
+      {name: 'Scala', icon: 'scala'},
+      {name: 'Rust', icon: 'rust'},
+      {name: 'Dart', icon: 'dart'},
+      {name: 'Haskell', icon: 'haskell'},
+      {name: 'Lua', icon: 'lua'},
+      {name: 'Perl', icon: 'perl'},
+      {name: 'Clojure', icon: 'clojure'},
+      {name: 'Elixir', icon: 'elixir'},
+      {name: 'Erlang', icon: 'erlang'},
+      {name: 'Groovy', icon: 'groovy'},
+      {name: 'Matlab', icon: 'matlab'},
+      {name: 'Objective-C', icon: 'objectivec'},
       // Add more default languages as needed
     ];
+    
 
     // Filter out languages that already exist in the database
+    console.log(defaultLanguages, "first log")
     const newLanguages = defaultLanguages.filter((defaultLang) => {
       return !existingLanguages.some((existingLang) => existingLang.name === defaultLang.name);
     });
-
+    console.log(newLanguages, "second log")
     if (newLanguages.length > 0) {
       // Insert only the new languages
       await Language.insertMany(newLanguages);
@@ -49,7 +56,7 @@ async function preloadLanguages() {
       // Touch a temporary file to trigger nodemon
       await fs.writeFile('nodemon-restart.tmp', '');
     } else {
-      console.log('No new languages to insert.');
+      console.log('No new languages to insert.', newLanguages);
     }
 
     console.log('Languages preloaded successfully.');
