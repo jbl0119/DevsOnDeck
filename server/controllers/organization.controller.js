@@ -36,6 +36,15 @@ module.exports.findAllPositions = (req, res) => {
             res.json({ message: 'Something went wrong', error: err })
         });
 }
+//READ - FIND ONE POSITION
+module.exports.findOnePosition = (req, res) => {
+    Position.findOne({ _id: req.params.id })
+    .then(onePosition => {
+        res.json({ position: onePosition })
+    })
+    .catch((err) => {
+        res.json({ message: 'Something went wrong', error: err })
+    });}
 //READ - FIND ALL ORGANIZATIONS
 module.exports.findAllOrganizations = (req, res) => {
     Organization.find()

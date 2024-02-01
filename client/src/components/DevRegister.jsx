@@ -51,6 +51,7 @@ const DevRegister = () => {
     return (
         <>
         
+
         <div class="bg-warning mb-3 d-flex align-items-center justify-content-between">
             <h1 class="display-2 ">DevsOnDeck</h1>
             <div>
@@ -68,6 +69,7 @@ const DevRegister = () => {
                 {errors.firstName && <p className="text-danger">{errors.firstName}</p>}
                 </div>
             </div>
+
             <div class='row mb-3'>
                 <label for="lastName" class="col-sm-3 col-form-label"><h3>Last Name</h3></label>
                 <div class="col-sm-9">
@@ -79,9 +81,11 @@ const DevRegister = () => {
                 <label for="email" class="col-sm-3 col-form-label"><h3>Email</h3></label>
                 <div class="col-sm-9">
                 <input type="text" class="form-control border-dark" id="email"  name="email" value={Developer.email} onChange={onChange}/>
+
                 {errors.email && <p className="text-danger">{errors.email}</p>}
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="address" class="col-sm-3 col-form-label"><h3>address</h3></label>
                 <div class="col-sm-9">
@@ -106,6 +110,7 @@ const DevRegister = () => {
                 </div>
             </div>
 
+
             <div class="row mb-3">
                 <label for="password" class="col-sm-3 col-form-label"><h3>Password</h3></label>
                 <div class="col-sm-9">
@@ -113,6 +118,7 @@ const DevRegister = () => {
                 {errors.password && <p className="text-danger">{errors.password}</p>}
                 </div>
             </div>
+
             <div class="row mb-3">
                 <label for="confirmPassword" class="col-sm-3 col-form-label"><h3>Confirm Password</h3></label>
                 <div class="col-sm-9">

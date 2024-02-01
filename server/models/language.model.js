@@ -10,7 +10,11 @@ LanguageSchema.virtual('developer', {
     localField: '_id',
     foreignField: 'languageId',
   });
-
+  LanguageSchema.virtual('position', {
+    ref: 'DevLanguage',
+    localField: '_id',
+    foreignField: 'languageId',
+  });
 
 const Language = mongoose.model('Language',LanguageSchema );
 module.exports = Language
