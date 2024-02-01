@@ -83,9 +83,8 @@ const OrgRegister = () => {
 
     return (
         <>
-        <form onSubmit={onSubmit}>
-            <div>
-            <h1>Organization Sign Up</h1>
+        <div class="bg-warning mb-3 d-flex align-items-center justify-content-between">
+            <h1 class="display-2 ">DevsOnDeck</h1>
             <div>
                 <label htmlFor="organizationName" className="form-label">Organization Name</label>
                 <input type="text" className="form-control"  id="organizationName" name="organizationName" value={organization.organizationName} onChange={onChange}/>
@@ -133,12 +132,12 @@ const OrgRegister = () => {
                 <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" value={organization.confirmPassword} onChange={onChange}/>
                 {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword}</p>}
             </div>
-            <div>
-                <input type='submit' value='Register'/>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="mt-2 btn btn-success btn-lg">Register</button>
             </div>
             </div>
         </form>
-        <a href="/DevRegister">Need to Sign Up a Developer?</a>
+        <a href="/devs/register"><h4>Need to Sign Up a Developer?</h4></a>
         </>
     )
 }

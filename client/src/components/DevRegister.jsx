@@ -51,61 +51,88 @@ const DevRegister = () => {
     return (
         <>
         
-        <div>
-            <h1>DevsOnDeck</h1>
-            <Link to={'/devs/login'}><button type="button" className="btn btn-primary">DevLogin</button></Link>
-            <Link to={'/orgs/login'}><button type="button" className="btn btn-primary">OrgLogin</button></Link>
+
+        <div class="bg-warning mb-3 d-flex align-items-center justify-content-between">
+            <h1 class="display-2 ">DevsOnDeck</h1>
+            <div>
+            <Link to={'/'}><button type="button" class="btn btn-dark btn-lg m-2">DevLogin</button></Link>
+            <Link to={'/orgs/login'}><button type="button" class="btn btn-dark btn-lg m-2">OrgLogin</button></Link>
+            </div>
         </div>
         <form onSubmit={onSubmit}>
-        <div className="container px-5 my-5">
-            <h1>Developer Sign Up</h1>
-            <div>
-                <label htmlFor="firstName" className="form-label">First Name</label>
-                <input type="text" className="form-control"  id="firstName" name="firstName" value={Developer.firstName} onChange={onChange}/>
+        <div class="container px-5 my-5 border border-dark rounded p-3">
+            <h1 class="display-1 mb-5">Developer Sign Up</h1>
+            <div class="row mb-3">
+                <label for="firstName" class="col-sm-3 col-form-label "><h3>First Name</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark"  id="firstName" name="firstName" value={Developer.firstName} onChange={onChange}/>
                 {errors.firstName && <p className="text-danger">{errors.firstName}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="lastName" className="form-label">Last Name</label>
-                <input type="text" className="form-control" id="lastName" name="lastName" value={Developer.lastName} onChange={onChange}/>
+
+            <div class='row mb-3'>
+                <label for="lastName" class="col-sm-3 col-form-label"><h3>Last Name</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="lastName" name="lastName" value={Developer.lastName} onChange={onChange}/>
                 {errors.lastName && <p className="text-danger">{errors.lastName}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="text" className="form-control" id="email"  name="email" value={Developer.email} onChange={onChange}/>
+            <div class="row mb-3">
+                <label for="email" class="col-sm-3 col-form-label"><h3>Email</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="email"  name="email" value={Developer.email} onChange={onChange}/>
+
                 {errors.email && <p className="text-danger">{errors.email}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="address" className="form-label">address</label>
-                <input type="text" className="form-control" id="address" name="address" value={Developer.address} onChange={onChange}/>
+
+            <div class="row mb-3">
+                <label for="address" class="col-sm-3 col-form-label"><h3>address</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="address" name="address" value={Developer.address} onChange={onChange}/>
                 {errors.address && <p className="text-danger">{errors.address}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="city" className="form-label">City</label>
-                <input type="text" className="form-control" id="city" name="city" value={Developer.city} onChange={onChange}/>
+            <div class="row mb-3">
+                <label for="city" class="col-sm-3 col-form-label"><h3>City</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="city" name="city" value={Developer.city} onChange={onChange}/>
                 {errors.city && <p className="text-danger">{errors.city}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="street" className="form-label">State</label>
-                <select className="form-control bfh-states" data-country="US" data-state="CA" id="state" name="state" value={Developer.state} onChange={onChange}>{stateOptions.map((state) => {
+            <div class="row mb-3">
+                <label for="street" class="col-sm-3 col-form-label"><h3>State</h3></label>
+                <div class="col-sm-9">
+                <select class="form-control bfh-states border-dark" data-country="US" data-state="CA" id="state" name="state" value={Developer.state} onChange={onChange}>{stateOptions.map((state) => {
                     return <option key={state} value={state}>{state}</option>
                 })}</select>
                 {errors.state && <p className="text-danger">{errors.state}</p>}
+                </div>
             </div>
 
-            <div>
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" id="password" name="password" value={Developer.password} onChange={onChange}/>
+
+            <div class="row mb-3">
+                <label for="password" class="col-sm-3 col-form-label"><h3>Password</h3></label>
+                <div class="col-sm-9">
+                <input type="password" class="form-control border-dark" id="password" name="password" value={Developer.password} onChange={onChange}/>
                 {errors.password && <p className="text-danger">{errors.password}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" value={Developer.confirmPassword} onChange={onChange}/>
+
+            <div class="row mb-3">
+                <label for="confirmPassword" class="col-sm-3 col-form-label"><h3>Confirm Password</h3></label>
+                <div class="col-sm-9">
+                <input type="password" class="form-control border-dark" id="confirmPassword" name="confirmPassword" value={Developer.confirmPassword} onChange={onChange}/>
                 {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword}</p>}
+                </div>
             </div>
-            <button type="submit">Register</button>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="mt-2 btn btn-success btn-lg">Register</button>
+            </div>
+
         </div>
         </form>
-        <a href="/orgs/register">need to Sign Up and Organization?</a>
+        <a href="/Orgs/Register"><h4>need to Sign Up and Organization?</h4></a>
         </>
     )
 }
