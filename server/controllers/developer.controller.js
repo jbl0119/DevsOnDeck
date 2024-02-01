@@ -44,19 +44,30 @@ module.exports.findOneSingleDeveloper = (req, res) => {
     };
 
 
-
-
-
 module.exports.loginDeveloper = async (req, res) => {
-    const { email, password } = req.body;
+    const loginData = req.body;
 
     try {
-        const developer = await Developer.validateLogin(email, password);
+        const developer = await Developer.validateLogin(loginData);
         res.json({ success: true, message: 'Login successful', developer: developer.toJSON() });
     } catch (error) {
-        res.status(401).json({ success: false, message: 'Login failed', error: error.message });
+        const detailedErrors = {};
+        
+        if (error.message === "User not found" || error.message === "Invalid password") {
+            detailedErrors.email = "User not found";
+            detailedErrors.password = "Invalid password";
+        } else if (error.errors) {
+            for (const field in error.errors) {
+                detailedErrors[field] = error.errors[field].message;
+            }
+        } else {
+            detailedErrors.general = error.message;
+        }
+
+        res.status(400).json({ success: false, message: 'Login failed', error: detailedErrors });
     }
 };
+    
 
 module.exports.logOutDeveloper = (req, res) => {
     req.session.destroy(err => {

@@ -76,6 +76,21 @@ OrganizationSchema.pre('save', function(next) {
         });
     });
 
+    OrganizationSchema.statics.validateLogin = async function (loginData) {
+        const user = await this.findOne({ contactEmail: loginData.contactEmail });
+    
+        if (!user) {
+            throw new Error("User not found");
+        }
+    
+        const passwordMatch = await bcrypt.compare(loginData.password, user.password);
+    
+        if (!passwordMatch) {
+            throw new Error("Invalid password");
+        }
+    
+        return user;
+    };
     
 const Organization = mongoose.model('Organization', OrganizationSchema);
 module.exports = Organization;

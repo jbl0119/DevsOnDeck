@@ -16,5 +16,5 @@ module.exports = app => {
     
     //DELETE ROUTE
     app.delete('/api/organizations/:id', OrganizationController.deleteAnExistingOrganization);
-    
+    app.post('/api/organizations/login', OrganizationController.loginOrganization);
 }
