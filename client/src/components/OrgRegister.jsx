@@ -40,6 +40,7 @@ const OrgRegister = () => {
                     password: "",
                     confirmPassword: "",
                 })
+                navigate('/orgs/dashboard')
                 })
             .catch((err) => {
                 console.log(err.response.data.errors)
@@ -90,6 +91,9 @@ const OrgRegister = () => {
             <div>
                 <label for="confirmPassword" class="form-label">Confirm</label>
                 <input type="password" class="form-control" name="confirmPassword" value={organization.confirmPassword} onchange={onChange}/>
+            </div>
+            <div>
+                <input type='submit' value='Register'/>
             </div>
             </div>
         </form>
