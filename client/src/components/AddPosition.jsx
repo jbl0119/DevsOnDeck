@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -31,7 +31,7 @@ const AddPosition = () => {
                 title: "",
                 description: ""
                 })
-                navigate('/orgs/dashboard')
+                navigate(`/orgs/dashboard/${organization._id}`)
                 })
             .catch((err) => {
                 console.log(err.response.data.errors)

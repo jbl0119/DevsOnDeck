@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -40,7 +40,7 @@ const OrgRegister = () => {
                     password: "",
                     confirmPassword: "",
                 })
-                navigate('/orgs/dashboard')
+                navigate(`/orgs/dashboard/${res.data.organization._id}`)
                 })
             .catch((err) => {
                 console.log(err.response.data.errors)

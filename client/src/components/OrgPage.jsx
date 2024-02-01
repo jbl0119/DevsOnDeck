@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-// import axios from 'axios';
+import React, {useState, useEffect, useParams} from 'react';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -7,7 +7,7 @@ const OrgPage = () => {
     const [organization, setOrganization] = useState([]);
     const [positions, setPositions] = useState([]);
     const navigate = useNavigate();
-    const {id} = ""
+    const {id} = useParams();
 
 
     useEffect(() => {

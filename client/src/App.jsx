@@ -16,7 +16,7 @@ function App() {
         
         <Route path="/DevRegister" element={<DevRegister/>}/>
         <Route path="/orgs/register" element={<OrgRegister/>}/>
-        <Route path="/orgs/dashboard" element={<OrgPage/>}/>
+        <Route path="/orgs/dashboard/:id" element={<OrgPage/>}/>
         <Route path="/orgs/jobs/add" element={<AddPosition/>}/>
       </Routes>
     </div>
