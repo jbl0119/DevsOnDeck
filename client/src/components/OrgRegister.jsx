@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -40,6 +40,7 @@ const OrgRegister = () => {
                     password: "",
                     confirmPassword: "",
                 })
+                navigate(`/orgs/dashboard/${res.data.organization._id}`)
                 })
             .catch((err) => {
                 console.log(err.response.data.errors)
@@ -90,6 +91,9 @@ const OrgRegister = () => {
             <div>
                 <label for="confirmPassword" class="form-label">Confirm</label>
                 <input type="password" class="form-control" name="confirmPassword" value={organization.confirmPassword} onchange={onChange}/>
+            </div>
+            <div>
+                <input type='submit' value='Register'/>
             </div>
             </div>
         </form>
