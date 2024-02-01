@@ -14,6 +14,11 @@ const devLanguageSchema = new mongoose.Schema({
     frameworkId:{
         type : Schema.Types.ObjectId,
         ref:'Framework',
+    },
+
+    positionId:{
+        type : Schema.Types.ObjectId,
+        ref:'Position',
     }
 });
 
