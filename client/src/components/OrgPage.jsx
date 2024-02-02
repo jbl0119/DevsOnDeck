@@ -1,43 +1,46 @@
-import React, {useState, useEffect, useParams} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const OrgPage = () => {
-    const [organization, setOrganization] = useState([]);
+    const [organization, setOrganization] = useState({});
     const [positions, setPositions] = useState([]);
     const navigate = useNavigate();
     const [developers, setDevelopers] = useState([]);
-    const {id} = useParams();
-
-
-    useEffect(() => {
-        axios.get(`http://localhost:8000/api/organizations/${id}`)
-            .then((res) => {
-                setOrganization(res.data.organization)
-            })
-            .catch((err) => console.log(err))
-    }, [id])
+    const { id } = useParams();
 
     useEffect(() => {
-        setPositions(organization.Position)
-    }, [organization])
+        const fetchData = async () => {
+            try {
+                const orgResponse = await axios.get(`http://localhost:8000/api/organizations/${id}`);
+                setOrganization(orgResponse.data.organization || {});
+
+                const devResponse = await axios.get('http://localhost:8000/api/developers');
+                setDevelopers(devResponse.data.allDaDevelopers || []);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [id]);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/developers`)
-            .then((res) => {
-                setDevelopers(res.data.allDaDevelopers)
-            })
-            .catch((err) => console.log(err))
-    }, [])
-
+        setPositions(organization.Position || []);
+    }, [organization]);
 
     return (
         <>
-        <div>
+            <div className="bg-warning mb-3 d-flex align-items-center justify-content-between">
+                <h1 className="display-2">DevsOnDeck</h1>
+                <div>
+                    <Link to={'/'}><button type="button" className="btn btn-dark btn-lg m-2">DevLogin</button></Link>
+                    <Link to={'/orgs/login'}><button type="button" className="btn btn-dark btn-lg m-2">OrgLogin</button></Link>
+                </div>
+            </div>
             <div>
                 <div>
-                    <a href="/orgs/jobs/add">List a New Position</a>
+                    <Link to="/orgs/jobs/add">List a New Position</Link>
                 </div>
                 <div>
                     <h2>Positions To Fill</h2>
@@ -61,10 +64,8 @@ const OrgPage = () => {
                     ))
                 }
             </div>
-        </div>
         </>
-    )
+    );
 }
-
 
 export default OrgPage;

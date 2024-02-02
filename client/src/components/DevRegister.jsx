@@ -87,7 +87,7 @@ const DevRegister = () => {
             </div>
 
             <div class="row mb-3">
-                <label for="address" class="col-sm-3 col-form-label"><h3>address</h3></label>
+                <label for="address" class="col-sm-3 col-form-label"><h3>Address</h3></label>
                 <div class="col-sm-9">
                 <input type="text" class="form-control border-dark" id="address" name="address" value={Developer.address} onChange={onChange}/>
                 {errors.address && <p className="text-danger">{errors.address}</p>}
@@ -132,7 +132,7 @@ const DevRegister = () => {
 
         </div>
         </form>
-        <a href="/Orgs/Register"><h4>need to Sign Up and Organization?</h4></a>
+        <a href="/Orgs/Register"><h4>Need to Sign Up an Organization?</h4></a>
         </>
     )
 }

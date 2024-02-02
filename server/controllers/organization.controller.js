@@ -3,28 +3,36 @@ const Position = require('../models/position.model');
 
 
 //CREATE - CREATE A NEW ORGANIZATION
-module.exports.createNewOrganization = async (req, res) => {
-    try { 
-        // GET POSITION
-        const { position, ...organizationData } = req.body;
-
-        // VALIDATE DATA TYPE
-        if (typeof Position !== 'string' || !Position) {
-
-            return res.status(400).json(
-                { message: 'Position must be a string' });
+module.exports.registerOranization = async (req, res) => {
+    const registrationData = req.body;
+    
+    try {
+        await Organization.validateRegistration(registrationData);
+        const newOrganization = new Organization(registrationData);
+        await newOrganization.save();
+        res.json({ success: true, message: 'Registration successful', Organization: newOrganization.toJSON() });
+    } catch (error) {
+        if (error.errors) {  // Check if the error has a 'errors' property
+            const detailedErrors = {};
+            for (const field in error.errors) {
+                detailedErrors[field] = error.errors[field].message;
+            }
+            res.status(400).json({ success: false, message: 'Registration failed', error: detailedErrors });
+        } else {
+            res.status(400).json({ success: false, message: 'Registration failed', error: error.message });
         }
-
-        const newOrganization = await Organization.create({
-            ...organizationData,
-            position: Position, 
-        });
-
-        res.json({ organization: { ...newOrganization._doc, position: { name: Position } } });
-    } catch (err) {
-        res.status(500).json({ message: 'Something went wrong', error: err });
     }
 };
+
+module.exports.createPosition = (req, res) => {
+    Position.create(req.body)
+        .then(newPosition => {
+            res.status(200).json({ Position: newPosition })
+        })
+        .catch((err) => {
+            res.status(500).json({ message: 'Something went wrong', error: err })
+        });
+}
 
 //READ - FIND ALL AVAILABLE POSITIONS FOR ORGANIZATION
 module.exports.findAllPositions = (req, res) => {

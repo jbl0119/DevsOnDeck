@@ -13,7 +13,8 @@ module.exports = app => {
     app.patch('/api/organizations/:id', OrganizationController.updateExistingOrganization);
 
     // CREATE ROUTE
-    app.post('/api/organizations', OrganizationController.createNewOrganization);
+    app.post('/api/organizations', OrganizationController.registerOranization);
+    app.post('/api/organizations/newposition', OrganizationController.createPosition);
     
     //DELETE ROUTE
     app.delete('/api/organizations/:id', OrganizationController.deleteAnExistingOrganization);

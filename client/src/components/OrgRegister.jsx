@@ -23,37 +23,7 @@ const OrgRegister = () => {
         setOrganization({...organization, [e.target.name]: e.target.value})
     }
 
-    // const onSubmit = (e) => {
-    //     e.preventDefault()
-    //     axios.post('http://localhost:8000/api/organizations', organization)
-    //         .then((res) => {
-    //             console.log(res)
-    //             navigate('/')
-    //             if(res.data.success) {
-    //                 setOrganization({
-    //                     organizationName: "",
-    //                     firstName: "",
-    //                     lastName: "",
-    //                     contactEmail: "",
-    //                     orgAddress: "",
-    //                     orgCity: "",
-    //                     state: "",
-    //                     password: "",
-    //                     confirmPassword: "",
-    //                 })
-    //                 navigate(`/orgs/dashboard/${res.data.organization._id}`)
-    //             }
-    //             else {
-    //                 setErrors(res.data.error)
-    //             }
-    //             })
-    //         .catch((err) => {
-    //             console.log(err.response.data.error)
-    //             setErrors(err.response.data.error)
-    //         })
-    //     }
-
-        const onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
         axios.post('http://localhost:8000/api/organizations', organization)
             .then((res) => {
@@ -86,60 +56,90 @@ const OrgRegister = () => {
         <div class="bg-warning mb-3 d-flex align-items-center justify-content-between">
             <h1 class="display-2 ">DevsOnDeck</h1>
             <div>
-                <label htmlFor="organizationName" className="form-label">Organization Name</label>
-                <input type="text" className="form-control"  id="organizationName" name="organizationName" value={organization.organizationName} onChange={onChange}/>
+            <Link to={'/'}><button type="button" class="btn btn-dark btn-lg m-2">DevLogin</button></Link>
+            <Link to={'/orgs/login'}><button type="button" class="btn btn-dark btn-lg m-2">OrgLogin</button></Link>
+            </div>
+        </div>
+        <form onSubmit={onSubmit}>
+            <div class="container px-5 my-5 border border-dark rounded p-3">
+            <h1 class="display-1 mb-5">Organization Sign Up</h1>
+            <div class="row mb-3">
+                <label for="organizationName" class="col-sm-3 col-form-label "><h3>Organization Name</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" name="organizationName" value={organization.organizationName} onChange={onChange}/>
                 {errors.organizationName && <p className="text-danger">{errors.organizationName}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="firstName" className="form-label">First Name</label>
-                <input type="text" className="form-control"  id="firstName" name="firstName" value={organization.firstName} onChange={onChange}/>
+            <div class="row mb-3">
+                <label for="firstName" class="col-sm-3 col-form-label "><h3>First Name</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark"  id="firstName" name="firstName" value={organization.firstName} onChange={onChange}/>
                 {errors.firstName && <p className="text-danger">{errors.firstName}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="lastName" className="form-label">Last Name</label>
-                <input type="text" className="form-control"  id="lastName" name="lastName" value={organization.lastName} onChange={onChange}/>
+
+            <div class='row mb-3'>
+                <label for="lastName" class="col-sm-3 col-form-label"><h3>Last Name</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="lastName" name="lastName" value={organization.lastName} onChange={onChange}/>
                 {errors.lastName && <p className="text-danger">{errors.lastName}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="contactEmail" className="form-label">Email</label>
-                <input type="text" className="form-control" id="contactEmail"  name="contactEmail" value={organization.contactEmail} onChange={onChange}/>
+            <div class="row mb-3">
+                <label for="contactEmail" class="col-sm-3 col-form-label"><h3>Email</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="contactEmail"  name="contactEmail" value={organization.contactEmail} onChange={onChange}/>
                 {errors.contactEmail && <p className="text-danger">{errors.contactEmail}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="orgAddress" className="form-label">Org Address</label>
-                <input type="text" className="form-control" name="orgAddress" id="orgAddress" value={organization.orgAddress} onChange={onChange}/>
+
+            <div class="row mb-3">
+                <label for="orgAddress" class="col-sm-3 col-form-label"><h3>Address</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="orgAddress" name="orgAddress" value={organization.orgAddress} onChange={onChange}/>
                 {errors.orgAddress && <p className="text-danger">{errors.orgAddress}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="orgCity" className="form-label">Org City</label>
-                <input type="text" className="form-control" name="orgCity" id="orgCity" value={organization.orgCity} onChange={onChange}/>
+            <div class="row mb-3">
+                <label for="orgCity" class="col-sm-3 col-form-label"><h3>City</h3></label>
+                <div class="col-sm-9">
+                <input type="text" class="form-control border-dark" id="orgCity" name="orgCity" value={organization.orgCity} onChange={onChange}/>
                 {errors.orgCity && <p className="text-danger">{errors.orgCity}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="state" className="form-label">State</label>
-                <select className="form-control bfh-states" data-country="US" data-state="CA" name="state" value={organization.state} onChange={onChange}>{stateOptions.map((state) => {
-                        return <option key={state} value={state}>{state}</option>
-                    })}</select>
+            <div class="row mb-3">
+                <label for="street" class="col-sm-3 col-form-label"><h3>State</h3></label>
+                <div class="col-sm-9">
+                <select class="form-control bfh-states border-dark" data-country="US" data-state="CA" id="state" name="state" value={organization.state} onChange={onChange}>{stateOptions.map((state) => {
+                    return <option key={state} value={state}>{state}</option>
+                })}</select>
                 {errors.state && <p className="text-danger">{errors.state}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" id="password" name="password" value={organization.password} onChange={onChange}/>
+
+
+            <div class="row mb-3">
+                <label for="password" class="col-sm-3 col-form-label"><h3>Password</h3></label>
+                <div class="col-sm-9">
+                <input type="password" class="form-control border-dark" id="password" name="password" value={organization.password} onChange={onChange}/>
                 {errors.password && <p className="text-danger">{errors.password}</p>}
+                </div>
             </div>
-            <div>
-                <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" value={organization.confirmPassword} onChange={onChange}/>
+
+            <div class="row mb-3">
+                <label for="confirmPassword" class="col-sm-3 col-form-label"><h3>Confirm Password</h3></label>
+                <div class="col-sm-9">
+                <input type="password" class="form-control border-dark" id="confirmPassword" name="confirmPassword" value={organization.confirmPassword} onChange={onChange}/>
                 {errors.confirmPassword && <p className="text-danger">{errors.confirmPassword}</p>}
+                </div>
             </div>
             <div class="d-flex justify-content-end">
                 <button type="submit" class="mt-2 btn btn-success btn-lg">Register</button>
             </div>
             </div>
         </form>
-        <a href="/devs/register"><h4>Need to Sign Up a Developer?</h4></a>
+        <a href="/devs/register"><h4>Need to Sign Up as a Developer?</h4></a>
         </>
     )
 }
-
 export default OrgRegister;

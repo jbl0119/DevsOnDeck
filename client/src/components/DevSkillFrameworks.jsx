@@ -38,7 +38,7 @@ const DevSkillFrameworks = () => {
             .then((res) => {
                 console.log(res);
                 if(pickedFrameworks.length === 5){setPickedFrameworks([]);
-                    navigate('/devs/register');                   
+                    navigate(`/devs/dashboard/${res.data.developer._id}`);                  
                 } 
                     else {
                         alert("Please pick 5 frameworks")
